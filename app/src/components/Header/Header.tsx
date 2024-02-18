@@ -1,10 +1,10 @@
 import "./Header.css";
 
-export interface HeaderProps {
+export interface IHeaderProps {
   appName: string;
 }
 
-export const Header = ({ appName }: HeaderProps) => {
+export const Header = ({ appName }: IHeaderProps) => {
   return (
     <header>
       <h1>{appName}</h1>
