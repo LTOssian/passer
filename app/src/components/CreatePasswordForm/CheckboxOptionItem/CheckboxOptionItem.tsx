@@ -1,5 +1,5 @@
 import CheckboxOverrideItem from "../CheckboxOverrideItem/CheckboxOverrideItem";
-import { LabelsConstants } from "../../../constants/labels";
+import LabelsConstants from "../../../constants/labels";
 
 import "./CheckboxOptionItem.css";
 
