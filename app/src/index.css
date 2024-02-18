@@ -1,4 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
 :root {
+  --clr-black-primary: #14131b;
+  --clr-white-primary: #f8f9fc;
+  --clr-primary-grey: #817d92;
+
+  --clr-black-secondary: #24232c;
+  --clr-accent-green: #32d583;
+  --clr-accent-red: #f97066;
+  --clr-accent-yellow: #fdb022;
+
+  --font-family: "JetBrains Mono", monospace;
+
+  --fs-title: 36px;
+  --fs-subtitle: 32px;
+  --fs-body-big: 24px;
+  --fs-body-small: 18px;
 }
 
 * {
@@ -8,4 +25,13 @@
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: var(--font-family);
+}
+
+body {
+  padding: 0 90px;
+
+  background-color: var(--clr-black-primary);
+  color: var(--clr-white-primary);
+  font-weight: 600;
 }
