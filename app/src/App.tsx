@@ -1,7 +1,12 @@
 import "./App.css";
+import { Header } from "./components/Header/Header";
 
 function App() {
-  return <div>ça tourne</div>;
+  return (
+    <main>
+      <Header appName="Passer" />
+    </main>
+  );
 }
 
 export default App;
