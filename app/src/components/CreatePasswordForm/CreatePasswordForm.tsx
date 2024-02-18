@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 
+import { ICreatePassword, IPassword, IPasswordConstraint } from "../../interfaces/password.model";
 import CheckboxOptionItem, { CheckboxValuesEnum } from "./CheckboxOptionItem/CheckboxOptionItem";
+import ErrorsConstants from "../../constants/errors";
+import ErrorDisplay from "../common/ErrorDisplay/ErrorDisplay";
 import GenericInput from "./GenericInput/GenericInput";
 import LabelsConstants from "../../constants/labels";
+import PasswordService from "../../services/password.service";
 import SubmitButton from "./SubmitButton/SubmitButton";
 
 import "./CreatePasswordForm.css";
 
-// Describes the state of the checkboxes
-export type ICheckboxState = Record<keyof typeof CheckboxValuesEnum, boolean>;
-
 const CreatePasswordForm = () => {
   // Initialize the record and set every key to false
-  const [areChecked, setAreChecked] = useState<ICheckboxState>(
+  const [areChecked, setAreChecked] = useState<IPasswordConstraint>(
     Object.keys(CheckboxValuesEnum).reduce((acc, key) => {
       acc[key as keyof typeof CheckboxValuesEnum] = false;
       return acc;
-    }, {} as ICheckboxState)
+    }, {} as IPasswordConstraint)
   );
 
   const [isLength, setLength] = useState<number>(8);
   const [isName, setName] = useState<string>("");
+  const [isError, setError] = useState<string>();
 
   /**
    * Handle the check action by inversing the value of the specified key
@@ -62,23 +64,46 @@ const CreatePasswordForm = () => {
     // console.log("length", isLength);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!areChecked.Digit && !areChecked.Lowercase && !areChecked.Symbol && !areChecked.Uppercase) {
+      setError(ErrorsConstants.REQUIRED_INCLUDES);
+      setTimeout(() => {
+        setError(undefined);
+      }, 5000);
+
+      return;
+    } else {
+      setError(undefined);
+    }
+
+    const credentials: ICreatePassword = {
+      name: isName,
+      length: isLength,
+      constraints: areChecked,
+    };
+
+    const passwordData: IPassword = PasswordService.generatePassword(credentials);
+
+    console.log(passwordData);
+
+    // DEBUG
+    // console.log(event);
+    // console.log(areChecked);
+    // console.log(isName);
+    // console.log(isLength);
+  };
+
   return (
-    <form
-      className="form create-password-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log(areChecked);
-        console.log(isName);
-        console.log(isLength);
-      }}
-    >
+    <form className="form create-password-form" onSubmit={handleSubmit}>
       <div className="input-container">
         <GenericInput
           inputType="text"
-          inputLabel="Nom"
+          inputLabel="Titre"
           inputKey="name"
           inputInitValue={isName}
-          inputPlaceholder="Nom du MDP"
+          inputPlaceholder="Titre du mdp"
           onChange={handleInputAction}
         />
         <GenericInput
@@ -89,6 +114,8 @@ const CreatePasswordForm = () => {
           onChange={handleInputAction}
         />
       </div>
+
+      {isError && <ErrorDisplay errors={[isError]} />}
       <div className="checkbox-container">
         {Object.entries(CheckboxValuesEnum).map(([key, value]) => {
           return (
@@ -103,6 +130,7 @@ const CreatePasswordForm = () => {
           );
         })}
       </div>
+
       <SubmitButton buttonText="Générer" />
     </form>
   );
