@@ -11,9 +11,10 @@ class PasswordService extends AbstractPasswordService {
     const password = this.getPassword({ length, constraints });
 
     return {
-      name,
-      strengh: this.getStrength({ length, constraints }),
-      password,
+      [name]: {
+        password,
+        strengh: this.getStrength({ length, constraints }),
+      },
     };
   }
 }

@@ -3,9 +3,10 @@ import { StrengthEnum } from "./strength.model";
 
 // Describes the password object
 export interface IPassword {
-  password: string;
-  name: string;
-  strengh: StrengthEnum;
+  [key: string]: {
+    password: string;
+    strengh: StrengthEnum;
+  };
 }
 
 // Describes the credentials for password creation
