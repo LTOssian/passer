@@ -1,0 +1,14 @@
+.checkbox-override-item {
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+
+  img {
+    width: 22px;
+  }
+
+  span {
+    white-space: nowrap;
+  }
+}
