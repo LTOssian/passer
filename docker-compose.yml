@@ -3,7 +3,7 @@ version: "3.9"
 services:
   passer_frontend:
     build:
-      context: .
+      context: ./app
       dockerfile: Dockerfile
       target: prod
     container_name: passer_frontend
