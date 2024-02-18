@@ -16,6 +16,10 @@
   --fs-subtitle: 32px;
   --fs-body-big: 24px;
   --fs-body-small: 18px;
+
+  --padding-vertical: 32px;
+  --padding-horizontal: 32px;
+  --padding-body-horizontal: 90px;
 }
 
 * {
@@ -29,9 +33,20 @@
 }
 
 body {
-  padding: 0 90px;
+  padding: 0 var(--padding-body-horizontal);
 
   background-color: var(--clr-black-primary);
   color: var(--clr-white-primary);
   font-weight: 600;
+}
+
+@media only screen and (max-width: 768px) {
+  :root {
+    --fs-title: 32px;
+    --fs-subtitle: 24px;
+
+    --padding-vertical: 32px;
+    --padding-horizontal: 18px;
+    --padding-body-horizontal: 16px;
+  }
 }
