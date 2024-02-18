@@ -8,9 +8,9 @@ export interface ICheckboxOverrideItemProps {
   checkboxLabel: string;
 }
 
-export const CheckboxOverrideItem = ({ isChecked, checkboxLabel }: ICheckboxOverrideItemProps) => {
+const CheckboxOverrideItem = ({ isChecked, checkboxLabel }: ICheckboxOverrideItemProps) => {
   return (
-    <div className="checkbox-override-item">
+    <div className="checkbox-override-item" tabIndex={0}>
       <img
         src={isChecked ? CheckedSvg : NotCheckedSvg}
         alt={`checkbox icon, currently ${isChecked ? "checked" : "not checked"}`}
@@ -19,3 +19,5 @@ export const CheckboxOverrideItem = ({ isChecked, checkboxLabel }: ICheckboxOver
     </div>
   );
 };
+
+export default CheckboxOverrideItem;
