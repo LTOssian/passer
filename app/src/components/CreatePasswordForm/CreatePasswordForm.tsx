@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { CheckboxOptionItem, CheckboxValuesEnum } from "./CheckboxOptionItem/CheckboxOptionItem";
+import CheckboxOptionItem, { CheckboxValuesEnum } from "./CheckboxOptionItem/CheckboxOptionItem";
 import { LabelsConstants } from "../../constants/labels";
 
 import "./CreatePasswordForm.css";
@@ -8,7 +8,7 @@ import "./CreatePasswordForm.css";
 // Describes the state of the checkboxes
 export type ICheckboxState = Record<keyof typeof CheckboxValuesEnum, boolean>;
 
-export const CreatePasswordForm = () => {
+const CreatePasswordForm = () => {
   // Initialize the record and set every key to false
   const [areChecked, setAreChecked] = useState<ICheckboxState>(
     Object.keys(CheckboxValuesEnum).reduce((acc, key) => {
@@ -53,3 +53,5 @@ export const CreatePasswordForm = () => {
     </div>
   );
 };
+
+export default CreatePasswordForm;
