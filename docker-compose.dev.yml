@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  passer_frontend:
+    build:
+      target: dev
+    image: passer_frontend:dev
+    ports:
+      - 5173:5173
+    volumes:
+      - ./:/home/app
+      - /home/app/node_modules
