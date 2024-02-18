@@ -1,12 +1,17 @@
-import "./App.css";
-import { Header } from "./components/Header/Header";
+import CreatePasswordForm from "./components/CreatePasswordForm/CreatePasswordForm";
+import Header from "./components/Header/Header";
 
-function App() {
+import "./App.css";
+
+const App = () => {
   return (
-    <main>
+    <>
       <Header appName="Passer" />
-    </main>
+      <main>
+        <CreatePasswordForm />
+      </main>
+    </>
   );
-}
+};
 
 export default App;

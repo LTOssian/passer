@@ -3,7 +3,7 @@
 :root {
   --clr-black-primary: #14131b;
   --clr-white-primary: #f8f9fc;
-  --clr-primary-grey: #817d92;
+  --clr-grey-primary: #817d92;
 
   --clr-black-secondary: #24232c;
   --clr-accent-green: #32d583;
@@ -20,6 +20,7 @@
   --padding-vertical: 32px;
   --padding-horizontal: 32px;
   --padding-body-horizontal: 90px;
+  --padding-item-vertical: 24px;
 }
 
 * {
@@ -48,5 +49,6 @@ body {
     --padding-vertical: 32px;
     --padding-horizontal: 18px;
     --padding-body-horizontal: 16px;
+    --padding-item-vertical: 18px;
   }
 }

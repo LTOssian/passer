@@ -1,0 +1,31 @@
+.generic-input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: var(--fs-body-small);
+
+  span {
+    color: var(--clr-grey-primary);
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  input {
+    font-size: var(--fs-body-big);
+    background: none;
+    background-color: var(--clr-black-secondary);
+  }
+
+  .number-input {
+    width: 50px;
+    color: var(--clr-accent-green);
+  }
+
+  .text-input {
+    text-align: right;
+    min-width: 150px;
+    color: var(--clr-white-primary);
+  }
+}

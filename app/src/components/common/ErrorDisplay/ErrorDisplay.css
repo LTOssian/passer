@@ -1,0 +1,4 @@
+.error-text {
+  color: var(--clr-accent-red);
+  font-size: var(--fs-body-small);
+}
