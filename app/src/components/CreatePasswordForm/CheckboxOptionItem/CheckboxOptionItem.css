@@ -1,0 +1,9 @@
+.checkbox-option-item {
+  display: flex;
+  align-items: start;
+  gap: 24px;
+
+  input {
+    display: none;
+  }
+}
