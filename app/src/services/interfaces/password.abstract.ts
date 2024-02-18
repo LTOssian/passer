@@ -15,7 +15,7 @@ export abstract class AbstractPasswordService {
    * @param param0 contains length and constraints
    * @returns password as stirng
    */
-  protected static getPassword({ length, constraints }: Omit<ICreatePassword, "name">): string {
+  protected static getPassword({ length, constraints }: Omit<ICreatePassword, "title">): string {
     const generationPoolByConstraint = this.getGenerationPoolByConstraint(constraints);
     let password = "";
 
@@ -55,8 +55,8 @@ export abstract class AbstractPasswordService {
    * @param param0 contains length and constraints
    * @returns string describing the Strengh
    */
-  protected static getStrength({ length, constraints }: Pick<ICreatePassword, "length" | "constraints">): StrengthEnum {
-    const constraintsScore = this.getConstraintsScore({ constraints });
+  protected static getStrength(length: number, constraints?: IPasswordConstraint): StrengthEnum {
+    const constraintsScore = constraints ? this.getConstraintsScore({ constraints }) : 0;
     if (length + constraintsScore < 8) return StrengthEnum.WEAK;
     else if (length + constraintsScore < 13) return StrengthEnum.MEDIUM;
 

@@ -1,4 +1,4 @@
-import { ICreatePassword, IPassword } from "../interfaces/password.model";
+import { ICreatePassword, IModifyPassword, IPassword } from "../interfaces/password.model";
 import { AbstractPasswordService } from "./interfaces/password.abstract";
 
 class PasswordService extends AbstractPasswordService {
@@ -7,13 +7,22 @@ class PasswordService extends AbstractPasswordService {
    * @param param0 contains name, length and constraints
    * @returns name, strengh and password
    */
-  public static generatePassword({ name, length, constraints }: ICreatePassword): IPassword {
+  public static generatePassword({ title, length, constraints }: ICreatePassword): IPassword {
     const password = this.getPassword({ length, constraints });
 
     return {
-      [name]: {
+      [title]: {
         password,
-        strengh: this.getStrength({ length, constraints }),
+        strengh: this.getStrength(length, constraints),
+      },
+    };
+  }
+
+  public static modifyPassword(currentPassword: IModifyPassword, changes: IModifyPassword): IPassword {
+    return {
+      [changes.title ?? currentPassword.title]: {
+        password: changes.password ?? currentPassword.password,
+        strengh: this.getStrength(changes.password?.length ?? currentPassword?.password.length),
       },
     };
   }

@@ -21,7 +21,7 @@ const CreatePasswordForm = () => {
   );
 
   const [isLength, setLength] = useState<number>(8);
-  const [isName, setName] = useState<string>("");
+  const [isTitle, setName] = useState<string>("");
   const [isError, setError] = useState<string>();
 
   /**
@@ -60,7 +60,7 @@ const CreatePasswordForm = () => {
 
     // DEBUG
     // console.log("new change", value, typeof value);
-    // console.log("name", isName);
+    // console.log("name", isTitle);
     // console.log("length", isLength);
   };
 
@@ -79,7 +79,7 @@ const CreatePasswordForm = () => {
     }
 
     const credentials: ICreatePassword = {
-      name: isName,
+      title: isTitle,
       length: isLength,
       constraints: areChecked,
     };
@@ -91,7 +91,7 @@ const CreatePasswordForm = () => {
     // DEBUG
     // console.log(event);
     // console.log(areChecked);
-    // console.log(isName);
+    // console.log(isTitle);
     // console.log(isLength);
   };
 
@@ -102,7 +102,7 @@ const CreatePasswordForm = () => {
           inputType="text"
           inputLabel="Titre"
           inputKey="name"
-          inputInitValue={isName}
+          inputInitValue={isTitle}
           inputPlaceholder="Titre du mdp"
           onChange={handleInputAction}
         />
