@@ -20,7 +20,6 @@ interface IPasswordItemProps {
 
 const PasswordItem = ({ title, strength, password, password_id }: IPasswordItemProps) => {
   const { deletePassword } = useLocalStorage();
-  const [isRevealed, setIsRevealed] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
 
@@ -85,13 +84,11 @@ const PasswordItem = ({ title, strength, password, password_id }: IPasswordItemP
       </div>
       <div className="password-container">
         <span>
-          {isRevealed
-            ? password
-            : password
-                .split("")
-                .map(() => "*")
-                .slice(0, Math.random() * password.length)
-                .join("") + "*****"}
+          {password
+            .split("")
+            .map(() => "*")
+            .slice(0, Math.random() * password.length)
+            .join("") + "*****"}
         </span>
         <IconDisplay src={isCopied ? DoneSvg : CopySvg} alt="Icone de copie" action={copyToClipboard} />
       </div>
