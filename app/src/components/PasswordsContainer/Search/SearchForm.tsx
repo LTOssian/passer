@@ -13,7 +13,7 @@ const SearchForm = ({ placeholderText, onSubmit, onChange }: ISearchFormProps) =
     <form className="search-form" onSubmit={onSubmit}>
       <label htmlFor="search">
         <span>{placeholderText}</span>
-        <input type="text" id="search" placeholder={"Entrez un titre..."} onChange={onChange} />
+        <input type="text" id="search" placeholder={"Cherchez un titre..."} onChange={onChange} />
       </label>
     </form>
   );

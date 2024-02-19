@@ -110,7 +110,7 @@ const CreatePasswordForm = () => {
           inputLabel="Titre"
           inputKey="name"
           inputInitValue={isTitle}
-          inputPlaceholder="Choisissez un titre"
+          inputPlaceholder="Entrez un titre..."
           onChange={handleInputAction}
         />
         <GenericInput

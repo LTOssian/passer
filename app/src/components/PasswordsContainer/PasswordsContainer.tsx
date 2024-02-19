@@ -39,7 +39,7 @@ const PasswordsContainer = ({}: IPasswordsContainerProps) => {
 
   return (
     <div className="passwords-container">
-      <SearchForm placeholderText="Chercher un mot de passe" onSubmit={handleSubmit} onChange={handleSearchChange} />
+      <SearchForm placeholderText="Filtre de recherche" onSubmit={handleSubmit} onChange={handleSearchChange} />
       <div className="password-item-container">
         {passwords
           .filter((password) => {
