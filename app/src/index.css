@@ -33,6 +33,10 @@
   font-family: var(--font-family);
 }
 
+html {
+  background-color: var(--clr-black-primary);
+}
+
 body {
   padding: 0 var(--padding-body-horizontal);
 
