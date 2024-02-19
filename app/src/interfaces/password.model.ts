@@ -6,7 +6,7 @@ export type TPassword = Record<
   string,
   {
     password: string;
-    strengh: StrengthEnum;
+    strength: StrengthEnum;
     password_id: string;
   }
 >;

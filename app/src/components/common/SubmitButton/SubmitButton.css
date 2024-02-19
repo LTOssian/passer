@@ -3,4 +3,9 @@ button {
   background-color: var(--clr-accent-green);
   border: none;
   padding: 16px;
+  cursor: pointer;
+
+  &.cancel {
+    background-color: var(--clr-accent-red);
+  }
 }

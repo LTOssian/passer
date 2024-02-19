@@ -53,7 +53,7 @@ export abstract class AbstractPasswordService {
   /**
    * Calculates the score of the password
    * @param param0 contains length and constraints
-   * @returns string describing the Strengh
+   * @returns string describing the strength
    */
   protected static getStrength(length: number, constraints?: IPasswordConstraint): StrengthEnum {
     const constraintsScore = constraints ? this.getConstraintsScore({ constraints }) : 0;
