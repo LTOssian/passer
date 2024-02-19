@@ -1,6 +1,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
-import { IModifyPassword, TPassword } from "../interfaces/password.model";
+import { CheckboxValuesEnum } from "../components/CreatePasswordForm/CheckboxOptionItem/CheckboxOptionItem";
+import { IModifyPassword, IPasswordConstraint, TPassword } from "../interfaces/password.model";
 import { ILocalStorageData, TPreferences } from "../interfaces/local-storage.model";
 
 export interface ILocalStorageContext {
@@ -27,7 +28,15 @@ export const LocalStorageProvider: React.FC<{ children: ReactNode }> = ({ childr
       const initialPasswords = localStorage.getItem("passwords");
 
       setLocalData({
-        preferences: initialPreferences ? (JSON.parse(initialPreferences) as TPreferences) : undefined,
+        preferences: initialPreferences
+          ? (JSON.parse(initialPreferences) as TPreferences)
+          : {
+              length: 8,
+              constraints: Object.keys(CheckboxValuesEnum).reduce((acc, key) => {
+                acc[key as keyof typeof CheckboxValuesEnum] = false;
+                return acc;
+              }, {} as IPasswordConstraint),
+            },
         passwords: initialPasswords ? (JSON.parse(initialPasswords) as TPassword[]) : [],
       });
       setIsLoaded(true);

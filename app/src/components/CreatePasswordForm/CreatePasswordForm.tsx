@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-import { ICreatePassword, IPassword, IPasswordConstraint } from "../../interfaces/password.model";
+import { ICreatePassword, TPassword, IPasswordConstraint } from "../../interfaces/password.model";
 import CheckboxOptionItem, { CheckboxValuesEnum } from "./CheckboxOptionItem/CheckboxOptionItem";
 import ErrorsConstants from "../../constants/errors";
 import ErrorDisplay from "../common/ErrorDisplay/ErrorDisplay";
@@ -12,6 +13,8 @@ import SubmitButton from "./SubmitButton/SubmitButton";
 import "./CreatePasswordForm.css";
 
 const CreatePasswordForm = () => {
+  const { createPassword, modifyPreferences, localData } = useLocalStorage();
+
   // Initialize the record and set every key to false
   const [areChecked, setAreChecked] = useState<IPasswordConstraint>(
     Object.keys(CheckboxValuesEnum).reduce((acc, key) => {
@@ -19,23 +22,34 @@ const CreatePasswordForm = () => {
       return acc;
     }, {} as IPasswordConstraint)
   );
-
   const [isLength, setLength] = useState<number>(8);
   const [isTitle, setName] = useState<string>("");
   const [isError, setError] = useState<string>();
+
+  useEffect(() => {
+    if (localData.preferences) {
+      setLength(localData.preferences.length);
+      setAreChecked(localData.preferences.constraints);
+    }
+  }, [localData]);
 
   /**
    * Handle the check action by inversing the value of the specified key
    * @param key CheckboxValuesEnum key
    */
   const handleCheckAction = (key: keyof typeof CheckboxValuesEnum) => {
+    modifyPreferences({
+      length: isLength,
+      constraints: {
+        ...areChecked,
+        [key]: !areChecked[key],
+      },
+    });
+
     setAreChecked((previousState) => ({
       ...previousState,
       [key]: !previousState[key],
     }));
-
-    // DEBUG
-    // console.log("new change", areChecked, key)
   };
 
   /**
@@ -51,17 +65,13 @@ const CreatePasswordForm = () => {
         setName(value);
         break;
       case "number":
+        modifyPreferences({ length: value, constraints: areChecked });
         setLength(value);
         break;
       default:
         console.warn(`Input value '${typeof value}' is not supported`);
         break;
     }
-
-    // DEBUG
-    // console.log("new change", value, typeof value);
-    // console.log("name", isTitle);
-    // console.log("length", isLength);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -83,16 +93,9 @@ const CreatePasswordForm = () => {
       length: isLength,
       constraints: areChecked,
     };
+    const passwordData: TPassword = PasswordService.generatePassword(credentials);
 
-    const passwordData: IPassword = PasswordService.generatePassword(credentials);
-
-    console.log(passwordData);
-
-    // DEBUG
-    // console.log(event);
-    // console.log(areChecked);
-    // console.log(isTitle);
-    // console.log(isLength);
+    createPassword(passwordData);
   };
 
   return (
@@ -124,7 +127,7 @@ const CreatePasswordForm = () => {
               checkboxKey={key as keyof typeof CheckboxValuesEnum}
               checkboxLabel={LabelsConstants[key as keyof typeof CheckboxValuesEnum]}
               checkboxType={value}
-              isChecked={areChecked[key as keyof typeof CheckboxValuesEnum]}
+              isChecked={areChecked[key as keyof typeof CheckboxValuesEnum] || false}
               onChangeAction={handleCheckAction}
             />
           );
