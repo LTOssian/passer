@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { StrengthEnum } from "../../../interfaces/strength.model";
 import IconDisplay from "../../common/IconDisplay/IconDisplay";
@@ -27,13 +27,13 @@ const PasswordItem = ({ title, strength, password, password_id }: IPasswordItemP
   /**
    * Unused but was supposed to reveal the apssword for 4 sec
    */
-  const toggleReveal = () => {
-    setIsRevealed(true);
+  // const toggleReveal = () => {
+  //   setIsRevealed(true);
 
-    setTimeout(() => {
-      setIsRevealed(false);
-    }, 4000);
-  };
+  //   setTimeout(() => {
+  //     setIsRevealed(false);
+  //   }, 4000);
+  // };
 
   /**
    * Inverse the value of isUpdate
