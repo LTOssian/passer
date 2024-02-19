@@ -1,0 +1,22 @@
+.search-form {
+  width: 100%;
+  max-width: 630px;
+  padding: var(--padding-horizontal) 0;
+  label {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    color: var(--clr-grey-primary);
+
+    input {
+      background-color: none;
+      background: none;
+      font-size: var(--fs-body-big);
+      color: var(--clr-white-primary);
+
+      &::placeholder {
+        color: inherit;
+      }
+    }
+  }
+}
