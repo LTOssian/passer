@@ -8,7 +8,7 @@ import ErrorDisplay from "../common/ErrorDisplay/ErrorDisplay";
 import GenericInput from "./GenericInput/GenericInput";
 import LabelsConstants from "../../constants/labels";
 import PasswordService from "../../services/password.service";
-import SubmitButton from "./SubmitButton/SubmitButton";
+import SubmitButton from "../common/SubmitButton/SubmitButton";
 
 import "./CreatePasswordForm.css";
 
@@ -74,6 +74,10 @@ const CreatePasswordForm = () => {
     }
   };
 
+  /**
+   * creates a new password item with the current properties
+   * @param event event from the form
+   */
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -106,7 +110,7 @@ const CreatePasswordForm = () => {
           inputLabel="Titre"
           inputKey="name"
           inputInitValue={isTitle}
-          inputPlaceholder="Titre du mdp"
+          inputPlaceholder="Titre du mdp..."
           onChange={handleInputAction}
         />
         <GenericInput

@@ -6,7 +6,7 @@ class PasswordService extends AbstractPasswordService {
   /**
    * Generated a password object
    * @param param0 contains name, length and constraints
-   * @returns name, strengh and password
+   * @returns name, strength and password
    */
   public static generatePassword({ title, length, constraints }: ICreatePassword): TPassword {
     const password = this.getPassword({ length, constraints });
@@ -14,7 +14,7 @@ class PasswordService extends AbstractPasswordService {
     return {
       [title]: {
         password,
-        strengh: this.getStrength(length, constraints),
+        strength: this.getStrength(length, constraints),
         password_id: uuidv4(),
       },
     };
@@ -27,7 +27,7 @@ class PasswordService extends AbstractPasswordService {
     return {
       [changes.title ?? currentPassword.title]: {
         password: changes.password ?? currentPassword.password,
-        strengh: this.getStrength(changes.password?.length ?? currentPassword?.password.length),
+        strength: this.getStrength(changes.password?.length ?? currentPassword?.password.length),
         password_id: currentPassword.password_id,
       },
     };
