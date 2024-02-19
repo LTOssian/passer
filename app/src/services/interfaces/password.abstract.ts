@@ -57,8 +57,8 @@ export abstract class AbstractPasswordService {
    */
   protected static getStrength(length: number, constraints?: IPasswordConstraint): StrengthEnum {
     const constraintsScore = constraints ? this.getConstraintsScore({ constraints }) : 0;
-    if (length + constraintsScore < 8) return StrengthEnum.WEAK;
-    else if (length + constraintsScore < 13) return StrengthEnum.MEDIUM;
+    if (length + constraintsScore < 10) return StrengthEnum.WEAK;
+    else if (length + constraintsScore < 14) return StrengthEnum.MEDIUM;
 
     return StrengthEnum.STRONG;
   }
