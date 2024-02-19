@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Passer est un projet réalisé dans le cadre du cours de Développement FrontEnd TypeScript à HETIC. La consigne est de réaliser une application performant des actions de CRUD.
+Passer est un projet réalisé dans le cadre du cours de Développement FrontEnd TypeScript à HETIC. La consigne est de réaliser une application web performant des actions de CRUD en respesctant une liste de contraintes.
 
 ![alt text](./documentation/app-model.png)
 
