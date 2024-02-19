@@ -10,7 +10,12 @@ export abstract class AbstractPasswordService {
     Symbol: "!@#$%^&*()",
   };
 
-  protected static getPassword({ length, constraints }: Omit<ICreatePassword, "name">) {
+  /**
+   * Generates the password based on length and constraints
+   * @param param0 contains length and constraints
+   * @returns password as stirng
+   */
+  protected static getPassword({ length, constraints }: Omit<ICreatePassword, "title">): string {
     const generationPoolByConstraint = this.getGenerationPoolByConstraint(constraints);
     let password = "";
 
@@ -21,6 +26,11 @@ export abstract class AbstractPasswordService {
     return password;
   }
 
+  /**
+   * Generate a pool of characters
+   * @param constraints
+   * @returns a string of available characters for the password generator
+   */
   private static getGenerationPoolByConstraint = (constraints: IPasswordConstraint): string => {
     return Object.entries(constraints).reduce((acc, [key, isChecked]) => {
       if (isChecked) acc += this.generationPool[key as keyof typeof CheckboxValuesEnum];
@@ -28,9 +38,27 @@ export abstract class AbstractPasswordService {
     }, "");
   };
 
-  protected static getStrength({ length }: Pick<ICreatePassword, "length">): StrengthEnum {
-    if (length < 6) return StrengthEnum.WEAK;
-    else if (length < 9) return StrengthEnum.MEDIUM;
+  /**
+   * Counts the number of valid constraints
+   * @param param0
+   * @returns number of constraints
+   */
+  protected static getConstraintsScore({ constraints }: Pick<ICreatePassword, "constraints">): number {
+    return Object.values(constraints).reduce((acc, curr) => {
+      acc += curr ? 1 : 0;
+      return acc;
+    }, 0);
+  }
+
+  /**
+   * Calculates the score of the password
+   * @param param0 contains length and constraints
+   * @returns string describing the Strengh
+   */
+  protected static getStrength(length: number, constraints?: IPasswordConstraint): StrengthEnum {
+    const constraintsScore = constraints ? this.getConstraintsScore({ constraints }) : 0;
+    if (length + constraintsScore < 8) return StrengthEnum.WEAK;
+    else if (length + constraintsScore < 13) return StrengthEnum.MEDIUM;
 
     return StrengthEnum.STRONG;
   }
