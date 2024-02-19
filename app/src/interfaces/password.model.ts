@@ -2,12 +2,14 @@ import { CheckboxValuesEnum } from "../components/CreatePasswordForm/CheckboxOpt
 import { StrengthEnum } from "./strength.model";
 
 // Describes the password object
-export interface IPassword {
-  [key: string]: {
+export type TPassword = Record<
+  string,
+  {
     password: string;
     strengh: StrengthEnum;
-  };
-}
+    password_id: string;
+  }
+>;
 
 // Describes the credentials for password creation
 export interface ICreatePassword {
